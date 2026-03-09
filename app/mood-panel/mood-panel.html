@@ -1,0 +1,36 @@
+<div class="main-container" [style.backgroundColor]="moodData[currentMood]?.color || '#ffffff'">
+  <div class="content-card">
+    <h1>Mood-Sync</h1>
+    <p>Bugün nasıl hissediyorsun?</p>
+
+    <div class="buttons">
+      <button (click)="changeMood('Mutlu')">😊 Mutlu</button>
+      <button (click)="changeMood('Yorgun')">🥱 Yorgun</button>
+      <button (click)="changeMood('Odaklı')">🎯 Odaklı</button>
+    </div>
+
+    <div class="info">
+      <hr>
+      <h3>{{ currentMood }} Modu</h3>
+      <p>{{ moodData[currentMood]?.quote }}</p>
+
+      <p><b>Öneri:</b> {{ moodData[currentMood]?.task }}</p>
+
+      
+      <button 
+        *ngIf="moodData[currentMood]?.showSongButton && moodData[currentMood]?.songUrl"
+        (click)="openSong(moodData[currentMood].songUrl)"
+        class="song-button">
+        🎵 {{ moodData[currentMood]?.suggestion }} Aç
+      </button>
+
+      
+      <button 
+        *ngIf="currentMood === 'Yorgun' && moodData['Yorgun']?.showTeaButton"
+        (click)="openTeaRecipe()"
+        class="tea-button">
+        ☕ {{ moodData['Yorgun']?.teaText }}
+      </button>
+    </div>
+  </div>
+</div>
